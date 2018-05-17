@@ -171,11 +171,11 @@ List iteration_curetime(arma::vec p0,
         dx = inactive_set*feasible_direction;
         bx = inactive_set*p0;
         vec subTe = Te.elem(unworking_set);
-        vec steps = (bx-log(subTe))/dx;
+        vec steps = (log(subTe)-bx)/dx;
         NumericVector step_size_candidate;
         int iac_size = unworking_set.n_elem;
         for (uword i = 0; i < iac_size; i++) {
-          if (dx(i) > 0) {
+          if (dx(i) < 0) {
             double chosen_step = steps(i);
             step_size_candidate.push_back(chosen_step);
           }
